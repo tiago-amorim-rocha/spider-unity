@@ -1,0 +1,112 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETStandard,Version=v2.1": {
+      "Assembly-CSharp/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Unity.VisualStudio.Editor": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Assembly-CSharp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Assembly-CSharp.dll": {}
+        }
+      },
+      "Unity.VisualStudio.Editor/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Unity.VisualStudio.Editor.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Unity.VisualStudio.Editor.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Assembly-CSharp/1.0.0": {
+      "type": "project",
+      "path": "Assembly-CSharp.csproj",
+      "msbuildProject": "Assembly-CSharp.csproj"
+    },
+    "Unity.VisualStudio.Editor/1.0.0": {
+      "type": "project",
+      "path": "Unity.VisualStudio.Editor.csproj",
+      "msbuildProject": "Unity.VisualStudio.Editor.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETStandard,Version=v2.1": [
+      "Assembly-CSharp >= 1.0.0",
+      "Unity.VisualStudio.Editor >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/tiagorocha/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/tiagorocha/GitHub/spider-unity/Assembly-CSharp-Editor.csproj",
+      "projectName": "Assembly-CSharp-Editor",
+      "projectPath": "/Users/tiagorocha/GitHub/spider-unity/Assembly-CSharp-Editor.csproj",
+      "packagesPath": "/Users/tiagorocha/.nuget/packages/",
+      "outputPath": "/Users/tiagorocha/GitHub/spider-unity/Temp/obj/Assembly-CSharp-Editor/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/tiagorocha/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netstandard2.1"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "projectReferences": {
+            "/Users/tiagorocha/GitHub/spider-unity/Assembly-CSharp.csproj": {
+              "projectPath": "/Users/tiagorocha/GitHub/spider-unity/Assembly-CSharp.csproj"
+            },
+            "/Users/tiagorocha/GitHub/spider-unity/Unity.VisualStudio.Editor.csproj": {
+              "projectPath": "/Users/tiagorocha/GitHub/spider-unity/Unity.VisualStudio.Editor.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
+    },
+    "frameworks": {
+      "netstandard2.1": {
+        "targetAlias": "netstandard2.1",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.301/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
