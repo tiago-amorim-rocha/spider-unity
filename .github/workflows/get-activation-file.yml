@@ -1,0 +1,44 @@
+name: Get Unity Activation File
+
+# This workflow generates the .alf file needed for Unity Personal license activation
+# Run this workflow manually, then download the .alf artifact and upload it to:
+# https://license.unity3d.com/manual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  get-activation-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Request Unity Activation File
+        id: get-alf
+        uses: game-ci/unity-request-activation-file@v2
+        with:
+          unityVersion: 6000.2.8f1
+
+      - name: Upload activation file
+        uses: actions/upload-artifact@v4
+        with:
+          name: Unity_v6000.2.8f1.alf
+          path: ${{ steps.get-alf.outputs.filePath }}
+
+      - name: Instructions
+        run: |
+          echo "✅ Activation file generated successfully!"
+          echo ""
+          echo "📥 Next steps:"
+          echo "1. Download the 'Unity_v6000.2.8f1.alf' artifact from this workflow run"
+          echo "2. Go to https://license.unity3d.com/manual"
+          echo "3. Log in with your Unity account"
+          echo "4. Upload the .alf file"
+          echo "5. Download the .ulf license file Unity gives you"
+          echo "6. Copy the entire contents of the .ulf file"
+          echo "7. Go to your repo Settings > Secrets and variables > Actions"
+          echo "8. Create a new secret named: UNITY_LICENSE"
+          echo "9. Paste the entire .ulf file contents as the secret value"
+          echo "10. Your WebGL build workflow will now work!"
