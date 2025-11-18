@@ -1,0 +1,54 @@
+name: Build WebGL
+
+on:
+  workflow_dispatch:
+    inputs:
+      buildName:
+        description: "Name of the build (folder/artifact suffix)"
+        required: false
+        default: "webgl-build"
+
+  push:
+    branches:
+      - main
+    paths:
+      - "Assets/**"
+      - "ProjectSettings/**"
+      - "Packages/**"
+
+jobs:
+  build-webgl:
+    runs-on: ubuntu-latest
+
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      UNITY_VERSION: "6000.2.8f1"
+      BUILD_NAME: ${{ github.event.inputs.buildName || 'webgl-build' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Unity Library
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ runner.os }}-${{ env.UNITY_VERSION }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-${{ runner.os }}-${{ env.UNITY_VERSION }}-
+
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v4
+        with:
+          targetPlatform: WebGL
+          unityVersion: ${{ env.UNITY_VERSION }}
+          allowDirtyBuild: true
+          buildName: ${{ env.BUILD_NAME }}
+          buildsPath: build
+
+      - name: Upload WebGL build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.BUILD_NAME }}
+          path: build/WebGL/${{ env.BUILD_NAME }}
+
