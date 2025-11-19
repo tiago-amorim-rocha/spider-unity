@@ -1,0 +1,52 @@
+name: Auto-promote Claude Branches
+
+on:
+  push:
+    branches:
+      - 'claude/**'
+
+jobs:
+  auto-promote:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Promote to main
+        run: |
+          # Get the current branch name
+          CURRENT_BRANCH="${GITHUB_REF#refs/heads/}"
+          echo "Promoting branch: $CURRENT_BRANCH"
+
+          # Fetch latest main
+          git fetch origin main
+
+          # Checkout main
+          git checkout main
+
+          # Merge the Claude branch
+          git merge --no-ff origin/$CURRENT_BRANCH -m "Auto-promote: Merge $CURRENT_BRANCH to main"
+
+          # Push to main
+          git push origin main
+
+      - name: Notify success
+        if: success()
+        run: |
+          echo "✅ Successfully promoted ${GITHUB_REF#refs/heads/} to main"
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "❌ Failed to promote ${GITHUB_REF#refs/heads/} to main"
+          exit 1
